@@ -1,4 +1,7 @@
+filetype plugin indent on
 execute pathogen#infect() 
+execute pathogen#helptags()
+
 set nocompatible
 set encoding=utf-8
 set number
@@ -20,7 +23,6 @@ set nobackup
 set nowb
 set ruler
 "set cursorline
-"filetype indent on
 "set wildmenu
 "set showmatch
 set incsearch
@@ -34,3 +36,4 @@ filetype plugin indent on
 "show status line
 set statusline=2
 "set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)
+let g:airline_powerline_fonts = 1 
