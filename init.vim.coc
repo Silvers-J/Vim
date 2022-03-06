@@ -1,17 +1,17 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'pangloss/vim-javascript'
+" Plug 'pangloss/vim-javascript'
 Plug 'jiangmiao/auto-pairs'
 Plug 'SirVer/ultisnips'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'honza/vim-snippets'
 Plug 'ThePrimeagen/vim-be-good', {'do': '.\install.sh'}
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
 Plug 'tpope/vim-fugitive'
-Plug 'stsewd/fzf-checkout.vim'
+" Plug 'stsewd/fzf-checkout.vim'
 Plug 'ap/vim-css-color'
 Plug 'vimwiki/vimwiki'
 Plug 'tpope/vim-repeat'
@@ -21,8 +21,9 @@ Plug 'mattn/emmet-vim'
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-startify'
 Plug 'aquach/vim-http-client'
+
 Plug 'sainnhe/gruvbox-material'
-Plug 'shinchu/lightline-gruvbox.vim'
+" Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -77,22 +78,9 @@ if has('termguicolors')
   set termguicolors
 endif
 
-" colorscheme dracula
-set background=dark
 let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_palette = 'original'
+let g:gruvbox_material_transparent_background = 1
 colorscheme gruvbox-material
-
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
 
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeMinimalUI = 1
@@ -101,6 +89,8 @@ let g:NERDTreeStatusline = ''
 
 nnoremap <silent> <C-b> :NERDTreeToggle<CR>
 nnoremap <silent> <leader>fl :NERDTreeFind<CR>
+
+nnoremap <silent> <leader>sl :SClose<CR>
 
 " nnoremap <C-p> :FZF<CR>
 " let g:fzf_action = {
@@ -220,9 +210,9 @@ command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-set statusline^=%{FugitiveStatusline()}
+" set statusline^=%{FugitiveStatusline()}
 " Mappings using CoCList: Show all diagnostics.
 nnoremap <silent> <space>a :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -277,6 +267,7 @@ augroup filetype_indent
 	autocmd FileType python     setlocal shiftwidth=4 softtabstop=4 expandtab
 	autocmd FileType css 	    setlocal shiftwidth=2 tabstop=2
 	autocmd FileType less 	    setlocal shiftwidth=2 tabstop=2
+	autocmd FileType java 	    setlocal shiftwidth=4 tabstop=4
 augroup END
 " autocmd BufRead *.html :normal gg=G
 " autocmd BufNewFile,BufRead *.styl setlocal sw=4 ts=4 
@@ -284,7 +275,7 @@ augroup END
 let g:neonesterm_default_mod = "botright"
 
 " fugitive merge 
-nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gs :Git<CR>
 nnoremap <leader>gb :GBranches<CR>
 nnoremap <leader>gh :diffget //2<CR>
 nnoremap <leader>gl :diffget //3<CR>
@@ -303,7 +294,8 @@ require('telescope').setup{
                     override_generic_sorter = false,
                     override_file_sorter = true,
                 }
-            }
+            },
+    --defaults = { file_ignore_patterns = {"node_modules"} }
 }
 require('telescope').load_extension('fzy_native')
 EOF
